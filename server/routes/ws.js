@@ -27,12 +27,21 @@ module.exports = function(ws, req) {
       const fileInfo = JSON.parse(message);
       const timeLimit = fileInfo.timeLimit || config.default_expire_seconds;
       const dlimit = fileInfo.dlimit || config.default_downloads;
+      const password = fileInfo.password;
       const metadata = fileInfo.fileMetadata;
       const auth = fileInfo.authorization;
       const user = await fxa.verify(fileInfo.bearer);
       const maxFileSize = config.max_file_size;
       const maxExpireSeconds = config.max_expire_seconds;
       const maxDownloads = config.max_downloads;
+
+      if (password != config.auth_password) {
+        ws.send(
+          JSON.stringify({
+            error: 401
+          })
+        );
+      }
 
       if (config.fxa_required && !user) {
         ws.send(

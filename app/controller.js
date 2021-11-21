@@ -153,12 +153,13 @@ export default function(state, emitter) {
 
       state.storage.addFile(ownedFile);
       // TODO integrate password into /upload request
-      if (archive.password) {
-        emitter.emit('password', {
-          password: archive.password,
-          file: ownedFile
-        });
-      }
+      // Ignoring the actual use of the password field
+      // if (archive.password) {
+      //   emitter.emit('password', {
+      //     password: archive.password,
+      //     file: ownedFile
+      //   });
+      // }
       state.modal = state.capabilities.share
         ? shareDialog(ownedFile.name, ownedFile.url)
         : copyDialog(ownedFile.name, ownedFile.url);

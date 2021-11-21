@@ -74,6 +74,11 @@ const conf = convict({
     default: 100,
     env: 'MAX_DOWNLOADS'
   },
+  auth_password: {
+    format: String,
+    default: 'y0ushouldntbehere',
+    env: 'AUTH_PASSWORD'
+  },
   max_files_per_archive: {
     format: Number,
     default: 64,

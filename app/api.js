@@ -190,6 +190,7 @@ async function upload(
   verifierB64,
   timeLimit,
   dlimit,
+  password,
   bearerToken,
   onprogress,
   canceller
@@ -213,7 +214,8 @@ async function upload(
       authorization: `send-v1 ${verifierB64}`,
       bearer: bearerToken,
       timeLimit,
-      dlimit
+      dlimit,
+      password
     };
     const uploadInfoResponse = listenForResponse(ws, canceller);
     ws.send(JSON.stringify(fileMeta));
@@ -267,6 +269,7 @@ export function uploadWs(
   verifierB64,
   timeLimit,
   dlimit,
+  password,
   bearerToken,
   onprogress
 ) {
@@ -283,6 +286,7 @@ export function uploadWs(
       verifierB64,
       timeLimit,
       dlimit,
+      password,
       bearerToken,
       onprogress,
       canceller
