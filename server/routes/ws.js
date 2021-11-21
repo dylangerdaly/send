@@ -41,6 +41,7 @@ module.exports = function(ws, req) {
             error: 401
           })
         );
+        return ws.close();
       }
 
       if (config.fxa_required && !user) {
